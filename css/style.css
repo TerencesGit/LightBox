@@ -1,0 +1,71 @@
+body{
+	margin: 0;
+	padding: 0
+}
+a{
+	text-decoration: none;
+	color: inherit;
+}
+.lightbox-mask{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+}
+.lightbox-popup {
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	width: 500px;
+	height: 500px;
+	margin: 0 0 0 -250px;
+	background-color: #fff;
+}
+.lightbox-popup img {
+	width: 100%;
+	height: 100%
+}
+.pic-view {
+	position: relative;
+	height: 500px;
+	border: 5px solid #fff;
+	border-radius: 3px;
+	background: url(../icon/loading.gif)no-repeat center
+}
+.pic-view .switch{
+	position: absolute;
+	top: 0;
+	width: 30%;
+	height: 100%;
+	cursor: pointer
+}
+.pic-view .btn-next{
+	right: 0
+}
+.pic-view .btn-prev-show{
+	background: url(../icon/prev.png)no-repeat left center
+}
+.pic-view .btn-next-show{
+	background: url(../icon/next.png)no-repeat right center
+}
+.lightbox-caption{
+	position: relative;
+	margin: -66px 5px 0;
+	padding: 5px 10px;
+	color: #fff;
+	background: rgba(0,0,0,.3)
+}
+.lightbox-caption p{
+	margin: 5px 0;
+}
+.lightbox-caption .lightbox-index{
+	color: #999;
+}
+.lightbox-caption  .btn-close{
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	background: url(../icon/close.png)no-repeat center
+}
