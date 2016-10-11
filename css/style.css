@@ -16,7 +16,7 @@ a{
 }
 .lightbox-popup {
 	position: absolute;
-	top: 0%;
+	top: 50px;
 	left: 50%;
 	width: 500px;
 	height: 500px;
@@ -40,6 +40,9 @@ a{
 	width: 30%;
 	height: 100%;
 	cursor: pointer
+}
+.pic-view .btn-prev{
+	left: 0
 }
 .pic-view .btn-next{
 	right: 0
