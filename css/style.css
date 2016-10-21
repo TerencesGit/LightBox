@@ -72,3 +72,7 @@ a{
 	right: 10px;
 	background: url(../icon/close.png)no-repeat center
 }
+.pic-group img{
+	width: 100px;
+	height: 100px;
+}
