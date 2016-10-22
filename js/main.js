@@ -23,7 +23,6 @@
 			this.body.prepend(this.popupMask,this.popup)
 		},
 		bindUI: function(){
-			console.log(this.body)
 			self = this;
 			this.groupName = null;
 			this.groupData = [];
@@ -82,7 +81,35 @@
 						top: -viewHeight
 					}).animate({
 						top: (winHeight-viewHeight)/2
-					},500).show()
+					},function(){
+
+					}).show()
+					
+					this.getIndexOf = function(currentId){
+						var index = 0;
+						$(this.groupData).each(function(i) {
+							index = i;
+							if(this.id === currentId){
+								return false
+							}
+						});
+						return index;
+					}
+					this.index = this.getIndexOf(currentId);
+					console.log(this.index)
+					var groupDataLength = this.groupData.length;
+					if(groupDataLength>0){
+						if(this.index === 0){
+							this.prevBtn.addClass('disabled')
+							this.nextBtn.removeClass('disabled')
+						}else if(this.index === groupDataLength-1){
+							this.prevBtn.removeClass('disabled')
+							this.nextBtn.addClass('disabled')
+						}else{
+							this.prevBtn.removeClass('disabled')
+							this.nextBtn.removeClass('disabled')
+						}
+					}
 				}
 				this.showMask(sourceSrc,currentId);		
 			}
