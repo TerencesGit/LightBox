@@ -61,6 +61,7 @@
 			
 		},
 		initPopup: function(Obj){
+			var self = this;
 				var sourceSrc = Obj.attr('data-source'),
 						currentId = Obj.attr('data-id');
 				this.showMask = function(sourceSrc,currentId){
@@ -82,7 +83,7 @@
 					}).animate({
 						top: (winHeight-viewHeight)/2
 					},function(){
-
+						self.loadImg(sourceSrc)
 					}).show()
 					
 					this.getIndexOf = function(currentId){
@@ -111,7 +112,20 @@
 						}
 					}
 				}
-				this.showMask(sourceSrc,currentId);		
+				this.showMask(sourceSrc,currentId);	
+				this.loadImg = function(sourceSrc){
+					this.preload(sourceSrc,function(){
+						self.popupPic.attr('src',sourceSrc).show()
+						console.log(self.popupPic.width())
+					})
+				}
+				this.preload = function(src,callback){
+					var img = new Image();
+					img.onload = function(){
+						callback()
+					}
+					img.src = src;	
+				}	
 			}
 	}
 	window.LightBox = LightBox;
