@@ -114,6 +114,10 @@
 				}
 				this.showMask(sourceSrc,currentId);	
 				this.loadImg = function(sourceSrc){
+					self.popupPic.css({
+						width: 'auto',
+						height: 'auto'
+					}).hide()
 					this.preload(sourceSrc,function(){
 						self.popupPic.attr('src',sourceSrc)
 						var imgWidth = self.popupPic.width(),
@@ -153,7 +157,17 @@
 					this.captionText.text(this.groupData[this.index].caption)
 					this.currentIndex.text("当前索引"+(this.index+1)+"/"+this.groupData.length)
 				}
-			}
+				this.popupMask.on('click',function(){
+					self.close()
+				})
+				this.closeBtn.on('click',function(){
+					self.close()
+				})
+		},
+		close: function(){
+			this.popupMask.fadeOut();
+			this.popup.fadeOut()
+		}
 	}
 	window.LightBox = LightBox;
 })(jQuery)
