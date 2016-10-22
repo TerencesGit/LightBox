@@ -10,7 +10,7 @@
 			this.popupMask = $('<div class="lightbox-mask"></div>');
 			this.popup =$('<div class="lightbox-popup"></div>');
 			this.popupContent = $('<div class="pic-view">'+
-			'<img class="lightbox-img" src="images/1-1.jpg" alt="">'+
+			'<img class="lightbox-img" src="images/1-1.jpg">'+
 			'<span class="switch btn-prev btn-prev-show"></span>'+
 			'<span class="switch btn-next btn-next-show"></span>'+
 		'</div>'+
@@ -56,7 +56,7 @@
 			this.nextBtn = this.popup.find('.btn-next')
 			this.prevBtn = this.popup.find('.btn-prev')
 			this.captionText = this.popup.find('.lightbox-desc');
-			this.currIndex = this.popup.find('.lightbox-index');
+			this.currentIndex = this.popup.find('.lightbox-index');
 			this.closeBtn = this.popup.find('.btn-close');
 			
 		},
@@ -115,8 +115,10 @@
 				this.showMask(sourceSrc,currentId);	
 				this.loadImg = function(sourceSrc){
 					this.preload(sourceSrc,function(){
-						self.popupPic.attr('src',sourceSrc).show()
-						console.log(self.popupPic.width())
+						self.popupPic.attr('src',sourceSrc)
+						var imgWidth = self.popupPic.width(),
+								imgHeight = self.popupPic.height();
+						self.changeImg(imgWidth,imgHeight)
 					})
 				}
 				this.preload = function(src,callback){
@@ -126,6 +128,31 @@
 					}
 					img.src = src;	
 				}	
+				this.changeImg = function(width,height){
+					var winWidth = $(window).width(),
+							winHeight = $(window).height();
+					var scale = Math.min(winWidth/(width+10),winHeight/(height+10),1);
+					width = width*scale;
+					height = height*scale;
+					this.picView.animate({
+						width: width+10,
+						height: height+10
+					})
+					this.popup.animate({
+						width: width+10,
+						height: height+10,
+						marginLeft: -(width/2),
+						top: (winHeight-height)/2
+					},function(){
+						self.popupPic.css({
+							width: width,
+							height: height
+						}).fadeIn()
+						self.picCaption.fadeIn()
+					}) 	
+					this.captionText.text(this.groupData[this.index].caption)
+					this.currentIndex.text("当前索引"+(this.index+1)+"/"+this.groupData.length)
+				}
 			}
 	}
 	window.LightBox = LightBox;
