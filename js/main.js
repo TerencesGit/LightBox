@@ -11,8 +11,8 @@
 			this.popup =$('<div class="lightbox-popup"></div>');
 			this.popupContent = $('<div class="pic-view">'+
 			'<img class="lightbox-img" src="images/1-1.jpg">'+
-			'<span class="switch btn-prev btn-prev-show"></span>'+
-			'<span class="switch btn-next btn-next-show"></span>'+
+			'<span class="switch btn-prev"></span>'+
+			'<span class="switch btn-next"></span>'+
 		'</div>'+
 		'<div class="lightbox-caption">'+
 			'<p class="lightbox-desc">图片标题</p>'+
@@ -162,6 +162,20 @@
 				})
 				this.closeBtn.on('click',function(){
 					self.close()
+				})
+				this.nextBtn.hover(function(){
+					if(!$(this).hasClass('disabled') && self.groupData.length>1){
+						$(this).addClass('btn-next-show')
+					}
+				},function(){
+					$(this).removeClass('btn-next-show')
+				})
+				this.prevBtn.hover(function(){
+					if(!$(this).hasClass('disabled') && self.groupData.length>1){
+						$(this).addClass('btn-prev-show')
+					}
+				},function(){
+					$(this).removeClass('btn-prev-show')
 				})
 		},
 		close: function(){

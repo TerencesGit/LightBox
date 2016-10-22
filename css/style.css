@@ -34,7 +34,6 @@ a{
 	background: url(../icon/loading.gif)no-repeat center
 }
 .pic-view .switch{
-	display: none;
 	position: absolute;
 	top: 0;
 	width: 30%;
