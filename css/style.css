@@ -7,6 +7,7 @@ a{
 	color: inherit;
 }
 .lightbox-mask{
+	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -15,11 +16,10 @@ a{
 	background: rgba(0,0,0,.5);
 }
 .lightbox-popup {
+	display: none;
 	position: absolute;
 	top: 50px;
 	left: 50%;
-	width: 500px;
-	height: 500px;
 	margin: 0 0 0 -250px;
 	background-color: #fff;
 }
@@ -35,6 +35,7 @@ a{
 	background: url(../icon/loading.gif)no-repeat center
 }
 .pic-view .switch{
+	display: none;
 	position: absolute;
 	top: 0;
 	width: 30%;
