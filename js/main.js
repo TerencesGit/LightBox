@@ -1,11 +1,11 @@
 ;(function($){
 	var LightBox = function(){
-		this.rendUI();
+		//this.rendUI();
 		this.bindUI();
+		
 	}
 	LightBox.prototype = {
 		rendUI: function(){
-			console.log(this)
 			this.popupMask = $('<div class="lightbox-mask"></div>');
 			this.popup =$('<div class="lightbox-popup"></div>');
 			this.popupContent = $('<div class="pic-view">'+
@@ -22,7 +22,31 @@
 			$(document.body).prepend(this.popupMask,this.popup)
 		},
 		bindUI: function(){
-
+			console.log(this)
+			self = this;
+			this.groupName = null;
+			this.groupData = [];
+			this.getGroup = function(){
+				var self = this;
+				var groupList = $(document.body).find("*[data-group="+this.groupName+"]")
+				self.groupData.length = 0;
+				groupList.each(function(){
+					self.groupData.push({
+						src: $(this).attr('data-source'),
+						id: $(this).attr('data-id'),
+						caption: $(this).attr('data-caption')
+					})
+				})
+				console.log(self.groupData)
+			}
+			$(document.body).delegate('.js-lightbox','click',function(e){
+				e.stopPropagation()
+				var curGroupName = $(this).attr('data-group');
+				if(curGroupName != self.groupName){
+					self.groupName = curGroupName;
+					self.getGroup()
+				}
+			})
 		}
 	}
 	window.LightBox = LightBox;
