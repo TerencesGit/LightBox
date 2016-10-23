@@ -1,8 +1,11 @@
 ;(function($){
-	var LightBox = function(){
+	var LightBox = function(config){
+		this.config = {
+			speed: 100
+		};
+		$.extend(this.config,config)
 		this.rendUI();
-		this.bindUI();
-		
+		this.bindUI();	
 	}
 	LightBox.prototype = {
 		rendUI: function(){
@@ -82,7 +85,7 @@
 						top: -viewHeight
 					}).animate({
 						top: (winHeight-viewHeight)/2
-					},function(){
+					},this.config.speed,function(){
 						self.loadImg(sourceSrc)
 					}).show()
 					
@@ -141,13 +144,13 @@
 					this.picView.animate({
 						width: width+10,
 						height: height+10
-					})
+					},this.config.speed)
 					this.popup.animate({
 						width: width+10,
 						height: height+10,
 						marginLeft: -(width/2),
 						top: (winHeight-height)/2
-					},function(){
+					},this.config.speed,function(){
 						self.popupPic.css({
 							width: width,
 							height: height
