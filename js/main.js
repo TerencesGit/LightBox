@@ -153,7 +153,8 @@
 							height: height
 						}).fadeIn()
 						self.picCaption.fadeIn()
-						self.flag = true
+						self.flag = true;
+						self.clear = true;
 					}) 	
 					this.captionText.text(this.groupData[this.index].caption)
 					this.currentIndex.text("当前索引"+(this.index+1)+"/"+this.groupData.length)
@@ -219,10 +220,21 @@
 						return false
 					}
 				}
+				var timer = null;
+				this.clear = false;
+				$(window).resize(function(){
+					if(self.clear){
+						clearTimeout(timer)
+						timer = setTimeout(function(){
+							self.loadImg(self.groupData[self.index].src)
+						},500)
+					}
+				})
 		},
 		close: function(){
 			this.popupMask.fadeOut();
 			this.popup.fadeOut()
+			this.clear = false
 		}
 	}
 	window.LightBox = LightBox;
