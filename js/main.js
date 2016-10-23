@@ -232,6 +232,19 @@
 							self.loadImg(self.groupData[self.index].src)
 						},500)
 					}
+				}).keyup(function(e){
+					if(self.clear){
+						var keyValue = e.which;
+						if(keyValue == 37 || keyValue == 38){
+							self.prevBtn.click()
+						}else if(keyValue == 39 ||keyValue == 40){
+							self.nextBtn.click()
+						}else if(keyValue == 27){
+							self.close()
+						}else{
+							return false
+						}
+					}
 				})
 		},
 		close: function(){
