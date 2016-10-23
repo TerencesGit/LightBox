@@ -153,6 +153,7 @@
 							height: height
 						}).fadeIn()
 						self.picCaption.fadeIn()
+						self.flag = true
 					}) 	
 					this.captionText.text(this.groupData[this.index].caption)
 					this.currentIndex.text("当前索引"+(this.index+1)+"/"+this.groupData.length)
@@ -163,20 +164,61 @@
 				this.closeBtn.on('click',function(){
 					self.close()
 				})
+				//向后切换按钮
 				this.nextBtn.hover(function(){
 					if(!$(this).hasClass('disabled') && self.groupData.length>1){
 						$(this).addClass('btn-next-show')
 					}
 				},function(){
 					$(this).removeClass('btn-next-show')
+				}).click(function(e){
+					if(!$(this).hasClass('disabled') && self.flag){
+						self.flag = false
+						e.stopPropagation();
+						self.goto('next')
+					}
 				})
+				//向前切换按钮
+				this.flag = true;
 				this.prevBtn.hover(function(){
 					if(!$(this).hasClass('disabled') && self.groupData.length>1){
 						$(this).addClass('btn-prev-show')
 					}
 				},function(){
 					$(this).removeClass('btn-prev-show')
+				}).click(function(e){
+					if(!$(this).hasClass('disabled') && self.flag){
+						self.flag = false
+						e.stopPropagation();
+						self.goto('prev')
+					}
 				})
+				//切换图片
+				this.goto = function(dir){
+					if(dir == 'next'){
+						this.index++;
+						if(this.index >= this.groupData.length-1){
+							this.nextBtn.addClass('disabled')
+						}
+						if(this.index != 0){
+							this.prevBtn.removeClass('disabled')
+						}
+						var src = this.groupData[this.index].src;
+						this.loadImg(src)
+					}else if(dir == 'prev'){
+						this.index--;
+						if(this.index <= 0){
+							this.prevBtn.addClass('disabled')
+						}
+						if(this.index != this.groupData.length-1){
+							this.nextBtn.removeClass('disabled')
+						}
+						var src = this.groupData[this.index].src;
+						this.loadImg(src)
+					}else{
+						return false
+					}
+				}
 		},
 		close: function(){
 			this.popupMask.fadeOut();
